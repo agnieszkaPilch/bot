@@ -18,6 +18,19 @@ var connector = new builder.ChatConnector({
 var bot = new builder.UniversalBot(connector);
 // If a Post request is made to /api/messages on port 3978 of our local server, then we pass it to the bot connector to handle
 server.post('/api/messages', connector.listen());
+
+bot.on('conversationUpdate', function (message) {
+    console.log(message)
+    if (message.membersAdded) {
+        message.membersAdded.forEach(function (identity) {
+            if (identity.id === message.address.bot.id) {
+                bot.beginDialog(message.address, '/');
+            }
+        });
+    }
+});
+
+
 // =========================================================
 // Bots Dialogs 
 // =========================================================
