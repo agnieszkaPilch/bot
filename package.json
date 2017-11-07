@@ -7,6 +7,9 @@
     "test": "test",
      "start" : "node app.js"
   },
+  "engines": {
+    "node": "8.9.0"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
