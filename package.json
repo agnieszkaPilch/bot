@@ -5,7 +5,7 @@
   "main": "all.js",
   "scripts": {
     "test": "test",
-     "start" : "node app.js"
+     "start" : "node all.js"
   },
   "engines": {
     "node": "8.9.0"
