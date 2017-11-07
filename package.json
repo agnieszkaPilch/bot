@@ -4,8 +4,8 @@
   "description": "bots POC",
   "main": "all.js",
   "scripts": {
-    "test": "test",
-     "start" : "node all.js"
+    "start" : "node all.js",
+    "test": "test"
   },
   "engines": {
     "node": "8.9.0"
