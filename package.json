@@ -2,7 +2,7 @@
   "name": "bots",
   "version": "1.0.0",
   "description": "bots POC",
-  "main": "index.js",
+  "main": "all.js",
   "scripts": {
     "test": "test"
   },
