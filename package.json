@@ -1,22 +1,22 @@
 {
-  "name": "bots",
+  "name": "hpbot",
   "version": "1.0.0",
-  "description": "bots POC",
+  "description": "testing micrsoft chatbot",
   "main": "all.js",
-  "scripts": {
-    "start" : "node all.js",
-    "test": "test"
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "node all.js"  
   },
-  "engines": {
-    "node": "8.9.0"
-  },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "chatbot"
+  ],
+  "author": "harshit pandey",
+  "license": "MIT",
   "dependencies": {
-    "bluebird": "^3.5.1",
-    "botbuilder": "^3.11.0",
-    "dotenv-extended": "^2.0.1",
-    "json-stringify-safe": "^5.0.1",
-    "restify": "^6.2.3"
+    "botbuilder": "^3.9.0",
+    "restify": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
   }
 }
