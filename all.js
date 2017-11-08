@@ -70,7 +70,7 @@ bot.dialog('ingredient', [
         }
         console.log(JSON.stringify(stringify(args)))
          if (ingredientName) {
-            session.dialogData.searchType = 'airport';
+            session.dialogData.searchType = 'ingredientName';
             next({ response: ingredientName.entity });
         } else {
             builder.Prompts.text(session, 'Please enter ingredient name');
@@ -78,7 +78,7 @@ bot.dialog('ingredient', [
     },
     function (session, results) {
         var ingredient = results.response;
-
+      session.send('Ingredient \'%s\' name', ingredient)
         // Async search
         Store
             .searchIngredients(ingredient)
