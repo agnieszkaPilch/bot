@@ -2,6 +2,7 @@
 var restify = require('restify');
 var builder = require('botbuilder');
 var Store = require('./Store');
+var stringify = require('json-stringify-safe');
 // =========================================================
 // Bot Setup
 // =========================================================
@@ -65,7 +66,7 @@ bot.dialog('ingredient', [
         if(args.intent){
          
             ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
-         session.send('Ingredient \'%s\' name', ingredientName)
+         session.send('Ingredient \'%s\' name', JSON.stringify(stringify(ingredientName)))
         }
         console.log(JSON.stringify(stringify(args)))
          if (ingredientName) {
