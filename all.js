@@ -45,7 +45,7 @@ bot.recognizer(recognizer);
 server.post('/api/messages', connector.listen());
 
 bot.on('conversationUpdate', function (message) {
-  bot.beginDialog(message.address, '/');
+  session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
             if (identity.id === message.address.bot.id) {
