@@ -45,7 +45,7 @@ bot.recognizer(recognizer);
 server.post('/api/messages', connector.listen());
 
 bot.on('conversationUpdate', function (message) {
-
+  bot.beginDialog(message.address, '/');
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
             if (identity.id === message.address.bot.id) {
