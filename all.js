@@ -70,6 +70,10 @@ bot.dialog('firstRun', function (session) {
     }
 });
 
+// log any bot errors into the console
+bot.on('error', function (e) {
+    session.send("Hello...");
+});
 
 // =========================================================
 // Bots Dialogs 
