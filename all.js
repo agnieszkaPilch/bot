@@ -20,7 +20,7 @@ var connector = new builder.ChatConnector({
 //var bot = new builder.UniversalBot(connector);
 
 var bot = new builder.UniversalBot(connector, function (session) {
-    console.log(session.message)
+     session.send("welcome")
     if(session.message.text) {
         session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
     } else{
