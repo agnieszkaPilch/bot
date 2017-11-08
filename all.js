@@ -64,9 +64,7 @@ bot.dialog('ingredient', [
     function (session, args, next) {
         var ingredientName;
         if(args.intent){
-         
             ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
-         session.send('Ingredient \'%s\' name', JSON.stringify(stringify(ingredientName)))
         }
         console.log(JSON.stringify(stringify(args)))
          if (ingredientName) {
@@ -78,7 +76,6 @@ bot.dialog('ingredient', [
     },
     function (session, results) {
         var ingredient = results.response;
-      session.send('Ingredient \'%s\' name', ingredient)
         // Async search
         Store
             .searchIngredients(ingredient)
