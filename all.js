@@ -1,6 +1,7 @@
 // Reference the packages we require so that we can use them in creating the bot
 var restify = require('restify');
 var builder = require('botbuilder');
+var Store = require('./Store');
 // =========================================================
 // Bot Setup
 // =========================================================
@@ -16,6 +17,45 @@ var connector = new builder.ChatConnector({
  appPassword: "gaqafXA38$|#tyQSDZR370["
 });
 var bot = new builder.UniversalBot(connector);
+var recognizer = new builder.LuisRecognizer("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/24db92ff-d566-4f54-9a2c-097b416a55cd?subscription-key=c2d0918c8dd9443eb2add33ddb61c70a&verbose=true");
+bot.recognizer(recognizer);
+
+bot.dialog('ingredient', [
+    function (session, args, next) {
+        var ingredientName;
+        if(args.intent){
+            ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
+        }
+        console.log(JSON.stringify(stringify(args)))
+         if (ingredientName) {
+            session.dialogData.searchType = 'airport';
+            next({ response: ingredientName.entity });
+        } else {
+            builder.Prompts.text(session, 'Please enter ingredient name');
+        }
+    },
+    function (session, results) {
+        var ingredient = results.response;
+
+        // Async search
+        Store
+            .searchIngredients(ingredient)
+            .then(function (res) {
+                // args
+                if (!res) {
+                    session.send("That's not a ingredient. Try asking about another ingredient.")
+                } else {
+                    session.send("This is what I know about it: " + res.fact);
+                }
+
+                // End
+                session.endDialog();
+            });
+    }
+]).triggerAction({
+    matches: 'ingredient'
+
+});
 //var bot = new builder.UniversalBot(connector, function (session) {
 //    console.log(session.message)
    // if(session.message.text) {
