@@ -15,15 +15,15 @@ var connector = new builder.ChatConnector({
  appId: "158e5648-4e97-45bf-a457-9c7d414cacd5",
  appPassword: "gaqafXA38$|#tyQSDZR370["
 });
-//var bot = new builder.UniversalBot(connector);
-var bot = new builder.UniversalBot(connector, function (session) {
-    console.log(session.message)
-    if(session.message.text) {
-        session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
-    } else{
-        session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
-    }
-});
+var bot = new builder.UniversalBot(connector);
+//var bot = new builder.UniversalBot(connector, function (session) {
+//    console.log(session.message)
+   // if(session.message.text) {
+   //     session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
+  //  } else{
+  //      session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
+  //  }
+//});
 
 
 // If a Post request is made to /api/messages on port 3978 of our local server, then we pass it to the bot connector to handle
@@ -47,5 +47,9 @@ bot.on('conversationUpdate', function (message) {
 // This is called the root dialog. It is the first point of entry for any message the bot receives
 bot.dialog('/', function (session) {
 // Send 'hello world' to the user
-session.send("Hello World");
+  if(session.message.text) {
+        session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
+    } else{
+        session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
+    }
 });
