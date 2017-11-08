@@ -20,7 +20,7 @@ var connector = new builder.ChatConnector({
 //var bot = new builder.UniversalBot(connector);
 
 var bot = new builder.UniversalBot(connector, function (session) {
-     session.send("welcome")
+   
     if(session.message.text) {
         session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
     } else{
@@ -45,7 +45,7 @@ bot.recognizer(recognizer);
 server.post('/api/messages', connector.listen());
 
 bot.on('conversationUpdate', function (message) {
-    console.log(message)
+
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
             if (identity.id === message.address.bot.id) {
@@ -75,7 +75,7 @@ bot.dialog('ingredient', [
         if(args.intent){
             ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
         }
-        console.log(JSON.stringify(stringify(args)))
+      
          if (ingredientName) {
             session.dialogData.searchType = 'ingredientName';
             next({ response: ingredientName.entity });
