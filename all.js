@@ -58,3 +58,40 @@ bot.dialog('/', function (session) {
         session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
     }
 });
+
+bot.dialog('ingredient', [
+    function (session, args, next) {
+        var ingredientName;
+        if(args.intent){
+            ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
+        }
+        console.log(JSON.stringify(stringify(args)))
+         if (ingredientName) {
+            session.dialogData.searchType = 'airport';
+            next({ response: ingredientName.entity });
+        } else {
+            builder.Prompts.text(session, 'Please enter ingredient name');
+        }
+    },
+    function (session, results) {
+        var ingredient = results.response;
+
+        // Async search
+        Store
+            .searchIngredients(ingredient)
+            .then(function (res) {
+                // args
+                if (!res) {
+                    session.send("That's not a ingredient. Try asking about another ingredient.")
+                } else {
+                    session.send("This is what I know about it: " + res.fact);
+                }
+
+                // End
+                session.endDialog();
+            });
+    }
+]).triggerAction({
+    matches: 'ingredient'
+
+});
