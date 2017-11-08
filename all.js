@@ -17,7 +17,16 @@ var connector = new builder.ChatConnector({
  appId: "158e5648-4e97-45bf-a457-9c7d414cacd5",
  appPassword: "gaqafXA38$|#tyQSDZR370["
 });
-var bot = new builder.UniversalBot(connector);
+//var bot = new builder.UniversalBot(connector);
+
+var bot = new builder.UniversalBot(connector, function (session) {
+    console.log(session.message)
+    if(session.message.text) {
+        session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
+    } else{
+        session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
+    }
+});
 var recognizer = new builder.LuisRecognizer("https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/24db92ff-d566-4f54-9a2c-097b416a55cd?subscription-key=c2d0918c8dd9443eb2add33ddb61c70a&verbose=true");
 bot.recognizer(recognizer);
 
@@ -51,14 +60,14 @@ bot.on('conversationUpdate', function (message) {
 // Bots Dialogs 
 // =========================================================
 // This is called the root dialog. It is the first point of entry for any message the bot receives
-bot.dialog('/', function (session) {
+//bot.dialog('/', function (session) {
 // Send 'hello world' to the user
-  if(session.message.text) {
-        session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
-    } else{
-        session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
-    }
-});
+ // if(session.message.text) {
+ //       session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
+ //   } else{
+  //      session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
+  //  }
+//});
 
 bot.dialog('ingredient', [
     function (session, args, next) {
