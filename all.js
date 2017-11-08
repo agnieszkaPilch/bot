@@ -20,7 +20,6 @@ var connector = new builder.ChatConnector({
 //var bot = new builder.UniversalBot(connector);
 
 var bot = new builder.UniversalBot(connector, function (session) {
-   setTimeout(function(){session.send("Welcome");}, 5000)
     if(session.message.text) {
         session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
     } else{
@@ -44,11 +43,12 @@ bot.recognizer(recognizer);
 // If a Post request is made to /api/messages on port 3978 of our local server, then we pass it to the bot connector to handle
 server.post('/api/messages', connector.listen());
 
-bot.on('conversationUpdate', function (message) {
+bot.on('ping', function (message) {
+ session.send('Sorry');
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
             if (identity.id === message.address.bot.id) {
-               setTimeout(function(){bot.beginDialog(message.address, '/');}, 5000)
+               bot.beginDialog(message.address, '/');
             }
         });
     }
