@@ -63,7 +63,9 @@ bot.dialog('ingredient', [
     function (session, args, next) {
         var ingredientName;
         if(args.intent){
+         
             ingredientName = builder.EntityRecognizer.findEntity(args.intent.entities, 'Ingr');
+         session.send('Ingredient \'%s\' name', ingredientName)
         }
         console.log(JSON.stringify(stringify(args)))
          if (ingredientName) {
