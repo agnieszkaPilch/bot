@@ -43,8 +43,8 @@ bot.recognizer(recognizer);
 // If a Post request is made to /api/messages on port 3978 of our local server, then we pass it to the bot connector to handle
 server.post('/api/messages', connector.listen());
 
-bot.on('ping', function (message) {
- session.send('Sorry');
+bot.on('conversationUpdate', function (message) {    
+    console.log('convesationUpdate Address : ' + JSON.stringify(message.address)); 
     if (message.membersAdded) {
         message.membersAdded.forEach(function (identity) {
             if (identity.id === message.address.bot.id) {
