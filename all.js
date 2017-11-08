@@ -44,30 +44,17 @@ bot.recognizer(recognizer);
 // If a Post request is made to /api/messages on port 3978 of our local server, then we pass it to the bot connector to handle
 server.post('/api/messages', connector.listen());
 
-//bot.on('conversationUpdate', function (message) {
-//    if (message.membersAdded) {
- //       message.membersAdded.forEach(function (identity) {
- //           if (identity.id === message.address.bot.id) {
-  ////              bot.beginDialog(message.address, '/');
-   //         }
-    //    });
-   // }
-//});
-// Add first run dialog
-bot.dialog('firstRun', function (session) {    
-    session.userData.firstRun = true;
-    session.send("Hello...").endDialog();
-}).triggerAction({
-    onFindAction: function (context, callback) {
-        // Only trigger if we've never seen user before
-        if (!context.userData.firstRun) {
-            // Return a score of 1.1 to ensure the first run dialog wins
-            callback(null, 1.1);
-        } else {
-            callback(null, 0.0);
-        }
+bot.on('conversationUpdate', function (message) {
+    if (message.membersAdded) {
+        message.membersAdded.forEach(function (identity) {
+            if (identity.id === message.address.bot.id) {
+               setTimeout(function(){bot.beginDialog(message.address, '/');}, 5000)
+            }
+        });
     }
 });
+
+
 
 
 // =========================================================
