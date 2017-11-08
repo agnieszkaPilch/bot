@@ -16,8 +16,11 @@
   "author": "harshit pandey",
   "license": "MIT",
   "dependencies": {
-    "botbuilder": "^3.9.0",
-    "restify": "^5.0.1"
+      "bluebird": "^3.5.1",
+    "botbuilder": "^3.11.0",
+    "dotenv-extended": "^2.0.1",
+    "json-stringify-safe": "^5.0.1",
+    "restify": "^6.2.3"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
