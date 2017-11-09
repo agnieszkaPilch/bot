@@ -20,7 +20,7 @@ var connector = new builder.ChatConnector({
 //var bot = new builder.UniversalBot(connector);
 
 var bot = new builder.UniversalBot(connector, function (session) {
-    if(session.message.text) {
+    if(session.message.text && session.message.text!=="USER_DEFINED_PAYLOAD") {
         session.send('Sorry, I did not understand \'%s\'. Type for example "check ethanol".', session.message.text);
     } else{
         session.send("Welcome to the Reckitt Benckiser Question Answear Applicaton. To ask about ingredient type for example \"check ethanol\"");
